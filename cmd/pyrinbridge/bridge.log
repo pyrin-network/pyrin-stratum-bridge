@@ -1,3 +1,0 @@
-{"level":"info","ts":"2025-01-02T00:15:15+03:00","msg":"hosting prom stats on :2114/metrics","server":"prometheus"}
-{"level":"info","ts":"2025-01-02T00:15:16+03:00","msg":"checking pyrin sync state","component":"pyrinapi:localhost:13110"}
-{"level":"info","ts":"2025-01-02T00:15:16+03:00","msg":"pyrin synced, starting server","component":"pyrinapi:localhost:13110"}
