@@ -5,8 +5,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/pyrin-network/pyrin-stratum-bridge/src/gostratum"
 	"github.com/pyrin-network/pyipad/app/appmessage"
+	"github.com/pyrin-network/pyrin-stratum-bridge/src/gostratum"
 )
 
 const maxjobs = 32

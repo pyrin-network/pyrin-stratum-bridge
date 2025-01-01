@@ -7,10 +7,10 @@ import (
 	"fmt"
 	"hash"
 	"log"
+	"lukechampine.com/blake3"
 	"math/big"
 
 	"github.com/pyrin-network/pyipad/app/appmessage"
-	"golang.org/x/crypto/blake2b"
 )
 
 // static value definitions to avoid overhead in diff translations
@@ -46,14 +46,6 @@ func DiffToTarget(diff float64) *big.Int {
 	return t
 }
 
-func TargetToDiff(target *big.Int) float64 {
-	targetFloat := new(big.Float).SetInt(target)
-	diff := new(big.Float).Quo(maxTarget, targetFloat)
-
-	diffFloat, _ := diff.Float64()
-	return diffFloat
-}
-
 func DiffToHash(diff float64) float64 {
 	hashVal := new(big.Float).Mul(minHash, big.NewFloat(diff))
 	hashVal.Quo(hashVal, bigGig)
@@ -63,10 +55,10 @@ func DiffToHash(diff float64) float64 {
 }
 
 func SerializeBlockHeader(template *appmessage.RPCBlock) ([]byte, error) {
-	hasher, err := blake2b.New(32, []byte("BlockHash"))
-	if err != nil {
-		return nil, err
-	}
+	var fixedSizeKey [32]byte
+	copy(fixedSizeKey[:], "BlockHash")
+	hasher := blake3.New(32, fixedSizeKey[:])
+
 	write16(hasher, uint16(template.Header.Version))
 	write64(hasher, uint64(len(template.Header.Parents)))
 	for _, v := range template.Header.Parents {

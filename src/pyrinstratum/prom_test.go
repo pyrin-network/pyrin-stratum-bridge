@@ -3,8 +3,8 @@ package pyrinstratum
 import (
 	"testing"
 
-	"github.com/pyrin-network/pyrin-stratum-bridge/src/gostratum"
 	"github.com/pyrin-network/pyipad/app/appmessage"
+	"github.com/pyrin-network/pyrin-stratum-bridge/src/gostratum"
 )
 
 func TestPromValid(t *testing.T) {
@@ -12,7 +12,7 @@ func TestPromValid(t *testing.T) {
 	// is valid to write to here
 	ctx := gostratum.StratumContext{}
 
-	RecordShareFound(&ctx, 1000.1001)
+	RecordShareFound(&ctx)
 	RecordStaleShare(&ctx)
 	RecordDupeShare(&ctx)
 	RecordInvalidShare(&ctx)
